@@ -2,13 +2,13 @@
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "", #each member changes this according to their password
     "database": "diet",
 }
 
 # ── Users ─────────────────────────────────────────────────────────────────────
-USER1_ID = None   # Non-vegetarian — fill in after querying the DB (Member 1)
-USER2_ID = None   # Vegetarian      — fill in after querying the DB (Member 1)
+USER1_ID = 1   # Non-vegetarian 
+USER2_ID = 2   # Vegetarian      
 
 # ── Nutrient IDs (from `nutrients` table) ─────────────────────────────────────
 NUTRIENT_IDS = {
