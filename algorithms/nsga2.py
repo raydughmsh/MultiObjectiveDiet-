@@ -80,7 +80,7 @@ def run_nsga2(data: dict, user_id: int, seed: int = 42) -> tuple:
     # Import here to avoid circular dependency before Member 3 is ready
     from problem.diet_problem import DietProblem
 
-    food_ids = np.array(data["foods_df"].index.tolist(), dtype=int)
+    food_ids = np.array(data["foods"]["id"].tolist(), dtype=int)
 
     problem  = DietProblem(data=data, user_id=user_id)
     sampling = SplitPermutationSampling(food_ids)
