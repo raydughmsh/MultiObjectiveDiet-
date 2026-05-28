@@ -1,6 +1,6 @@
 import pymysql
 from config import DB_CONFIG
-
+#every one can try this file to see if the mysql connection run successfully
 try:
     connection = pymysql.connect(**DB_CONFIG)
 
