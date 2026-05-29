@@ -2,7 +2,7 @@
 DB_CONFIG = {
     "host": "localhost",
     "user": "root",
-    "password": "1570sedra", #each member changes this according to their password
+        "password": None,  # each member changes this to their own MySQL password (None = no password)
     "database": "diet",
 }
 
