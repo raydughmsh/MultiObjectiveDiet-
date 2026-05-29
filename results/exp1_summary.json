@@ -1,0 +1,21 @@
+{
+  "experiment": "User Comparison",
+  "algorithm": "NSGA-II",
+  "user1": {
+    "id": 1,
+    "type": "non-vegetarian",
+    "hypervolume": 3339143.6618966814,
+    "n_pareto": 100
+  },
+  "user2": {
+    "id": 2,
+    "type": "vegetarian",
+    "hypervolume": 5018704.140791018,
+    "n_pareto": 100
+  },
+  "reference_point": [
+    0.9823073929936519,
+    52.2524989865,
+    866.1800680783485
+  ]
+}

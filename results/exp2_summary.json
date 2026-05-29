@@ -1,0 +1,20 @@
+{
+  "experiment": "Algorithm Comparison",
+  "user": {
+    "id": 1,
+    "type": "non-vegetarian"
+  },
+  "nsga2": {
+    "hypervolume": 3210377.7530423417,
+    "n_pareto": 100
+  },
+  "spea2": {
+    "hypervolume": 3156261.709887906,
+    "n_pareto": 100
+  },
+  "reference_point": [
+    0.9823073929936519,
+    52.2524989865,
+    866.1800680783485
+  ]
+}

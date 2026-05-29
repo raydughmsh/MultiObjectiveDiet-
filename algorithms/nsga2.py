@@ -48,16 +48,17 @@ class SplitPermutationSampling(Sampling):
         self.food_ids = food_ids  # shape (N_FOODS,), actual DB food IDs
 
     def _do(self, problem, n_samples, **kwargs):
-        X = np.empty((n_samples, len(self.food_ids)), dtype=int)
+        n = len(self.food_ids)
+        X = np.empty((n_samples, n), dtype=int)
         rng = np.random.default_rng()
         for i in range(n_samples):
-            X[i] = rng.permutation(self.food_ids)
+            X[i] = rng.permutation(n)   # indices 0..N-1, not actual food IDs
         return X
 
 
 # ── NSGA-II runner ────────────────────────────────────────────────────────────
 
-def run_nsga2(data: dict, user_id: int, seed: int = 42) -> tuple:
+def run_nsga2(data: dict, user_id: int, seed: int = 42, use_diversity: bool = True) -> tuple:
     """
     Run NSGA-II for a given user and return the result + per-generation history.
 
@@ -82,7 +83,7 @@ def run_nsga2(data: dict, user_id: int, seed: int = 42) -> tuple:
 
     food_ids = np.array(data["foods"]["id"].tolist(), dtype=int)
 
-    problem  = DietProblem(data=data, user_id=user_id)
+    problem  = DietProblem(data=data, use_diversity=use_diversity)
     sampling = SplitPermutationSampling(food_ids)
 
     algorithm = NSGA2(

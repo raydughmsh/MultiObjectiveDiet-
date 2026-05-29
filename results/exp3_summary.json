@@ -1,0 +1,21 @@
+{
+  "experiment": "Diversity Impact",
+  "algorithm": "NSGA-II",
+  "user": {
+    "id": 1,
+    "type": "non-vegetarian"
+  },
+  "with_diversity": {
+    "hypervolume": 3424788.000642578,
+    "n_pareto": 100
+  },
+  "without_diversity": {
+    "hypervolume": 3337781.9592476767,
+    "n_pareto": 100
+  },
+  "reference_point": [
+    0.9823073929936519,
+    52.2524989865,
+    866.1800680783485
+  ]
+}

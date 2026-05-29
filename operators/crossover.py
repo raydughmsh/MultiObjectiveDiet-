@@ -127,6 +127,7 @@ class SplitOXCrossover(Crossover):
     def __init__(self, p_c: float = P_CROSSOVER):
         # n_parents=2, n_offsprings=2
         super().__init__(n_parents=2, n_offsprings=2, prob=p_c)
+        self._p_c = p_c   # store plain Python float separately
 
     def _do(self, problem, X, **kwargs):
         """
@@ -140,7 +141,7 @@ class SplitOXCrossover(Crossover):
         for k in range(n_matings):
             p1 = X[0, k, :]
             p2 = X[1, k, :]
-            o1, o2 = ox_crossover(p1, p2, rng=rng, p_c=self.prob)
+            o1, o2 = ox_crossover(p1, p2, rng=rng, p_c=self._p_c)
             offspring[0, k, :] = o1
             offspring[1, k, :] = o2
 
