@@ -16,6 +16,7 @@ OX algorithm (for one part of length n):
 """
 
 import numpy as np
+from typing import Optional
 from config import N_BREAKFAST, N_FOODS, P_CROSSOVER
 
 
@@ -60,7 +61,7 @@ def _ox_single(p1: np.ndarray, p2: np.ndarray, rng: np.random.Generator) -> np.n
 def ox_crossover(
     parent1: np.ndarray,
     parent2: np.ndarray,
-    rng: np.random.Generator | None = None,
+    rng: Optional[np.random.Generator] = None,
     p_c: float = P_CROSSOVER,
 ) -> tuple[np.ndarray, np.ndarray]:
     """

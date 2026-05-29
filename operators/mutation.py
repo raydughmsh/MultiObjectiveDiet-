@@ -10,6 +10,7 @@ This preserves the permutation property within each part.
 """
 
 import numpy as np
+from typing import Optional
 from pymoo.core.mutation import Mutation
 
 from config import N_BREAKFAST, N_FOODS, P_MUTATION_B, P_MUTATION_LD
@@ -55,7 +56,7 @@ def _swap_mutate_single(
 
 def swap_mutation(
     chromosome: np.ndarray,
-    rng: np.random.Generator | None = None,
+    rng: Optional[np.random.Generator] = None,
     p_m_b: float = P_MUTATION_B,
     p_m_ld: float = P_MUTATION_LD,
 ) -> np.ndarray:

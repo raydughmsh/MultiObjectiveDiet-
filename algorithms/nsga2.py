@@ -12,13 +12,14 @@ The chromosome and fitness evaluation are handled by DietProblem
 Usage
 -----
     from algorithms.nsga2 import run_nsga2
-    from db.loader import load_data_for_user   # Member 1
+    from db.loader import load_all_data   # Member 1
 
-    data = load_data_for_user(user_id=1)
+    data = load_all_data(user_id=1)
     result, history = run_nsga2(data, user_id=1)
 """
 
 import numpy as np
+from typing import List
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.optimize import minimize
 from pymoo.termination import get_termination
@@ -37,22 +38,17 @@ from config import (
 
 class SplitPermutationSampling(Sampling):
     """
-    Initializes each individual as a random permutation of N_FOODS food IDs.
+    Initializes each individual as a random permutation of indices 0..N_FOODS-1.
 
-    The food IDs passed at construction time (from the DB) are shuffled
-    independently to create each chromosome.
+    DietProblem maps these indices to actual food IDs internally via
+    self._food_ids[int(i)], so pymoo always works with index-based permutations.
     """
 
-    def __init__(self, food_ids: np.ndarray):
-        super().__init__()
-        self.food_ids = food_ids  # shape (N_FOODS,), actual DB food IDs
-
     def _do(self, problem, n_samples, **kwargs):
-        n = len(self.food_ids)
-        X = np.empty((n_samples, n), dtype=int)
+        X = np.empty((n_samples, N_FOODS), dtype=int)
         rng = np.random.default_rng()
         for i in range(n_samples):
-            X[i] = rng.permutation(n)   # indices 0..N-1, not actual food IDs
+            X[i] = rng.permutation(N_FOODS)  # indices 0..N_FOODS-1
         return X
 
 
@@ -64,8 +60,8 @@ def run_nsga2(data: dict, user_id: int, seed: int = 42, use_diversity: bool = Tr
 
     Parameters
     ----------
-    data    : dict returned by Member 1's load_data_for_user(user_id)
-              Expected keys: 'foods_df', 'nutrient_matrix', 'dri', 'food_groups'
+    data    : dict returned by Member 1's load_all_data(user_id)
+              Expected keys: 'foods', 'food_nutrients', 'dri', 'food_groups'
     user_id : int (1 = non-vegetarian, 2 = vegetarian)
     seed    : random seed for reproducibility
 
@@ -81,10 +77,8 @@ def run_nsga2(data: dict, user_id: int, seed: int = 42, use_diversity: bool = Tr
     # Import here to avoid circular dependency before Member 3 is ready
     from problem.diet_problem import DietProblem
 
-    food_ids = np.array(data["foods"]["id"].tolist(), dtype=int)
-
     problem  = DietProblem(data=data, use_diversity=use_diversity)
-    sampling = SplitPermutationSampling(food_ids)
+    sampling = SplitPermutationSampling()
 
     algorithm = NSGA2(
         pop_size=POP_SIZE,
@@ -112,7 +106,7 @@ def run_nsga2(data: dict, user_id: int, seed: int = 42, use_diversity: bool = Tr
 
 # ── Extract per-generation hypervolume history ────────────────────────────────
 
-def _extract_history(result) -> list[dict]:
+def _extract_history(result) -> List[dict]:
     """
     Walk through the saved algorithm history and record:
       - generation number

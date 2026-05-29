@@ -19,6 +19,7 @@ Objectives (column order in result.F):
 """
 
 import numpy as np
+from typing import List, Tuple
 from pymoo.indicators.hv import HV
 
 import config
@@ -79,7 +80,7 @@ def compute_hv(F: np.ndarray, ref_point: np.ndarray) -> float:
     return float(ind(F))
 
 
-def fill_history_hv(history: list[dict], ref_point: np.ndarray) -> list[dict]:
+def fill_history_hv(history: List[dict], ref_point: np.ndarray) -> List[dict]:
     """
     Fill in the 'hypervolume' field for each generation in an algorithm history.
 
@@ -107,7 +108,7 @@ def fill_history_hv(history: list[dict], ref_point: np.ndarray) -> list[dict]:
 
 # ── Convenience: compute HV curve for one algorithm run ──────────────────────
 
-def hv_curve(history: list[dict], ref_point: np.ndarray) -> tuple[list[int], list[float]]:
+def hv_curve(history: List[dict], ref_point: np.ndarray) -> Tuple[List[int], List[float]]:
     """
     Return (generations, hv_values) arrays suitable for plotting.
 
