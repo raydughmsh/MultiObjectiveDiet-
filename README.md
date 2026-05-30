@@ -1,9 +1,9 @@
 # Multi-Objective Diet Optimization Problem (MODP)
 
-**Course:** BLM20364E / BLM22332E — Heuristic Optimization Algorithms  
-**University:** Fatih Sultan Mehmet Vakıf University — Faculty of Engineering, Dept. of Software Engineering  
+**Course:** BLM20364E / BLM22332E - Heuristic Optimization Algorithms  
+**University:** Fatih Sultan Mehmet Vakıf University - Faculty of Engineering, Dept. of Software Engineering  
 **Instructor:** Asst. Prof. Dr. Cumali Türkmenoğlu  
-**Academic Year:** 2024–2025  
+**Academic Year:** 2025–2026
 **Repository:** https://github.com/raydughmsh/MultiObjectiveDiet-
 
 ---
@@ -26,9 +26,9 @@ This project solves a **Multi-Objective Diet Optimization Problem (MODP)**
 modelled as a Multi-Objective Multidimensional Knapsack Problem (MOMKP).
 
 **Three objectives:**
-- **f1** — Maximize user food preference (negated for pymoo)
-- **f2** — Minimize total meal cost
-- **f3** — Minimize total preparation + cooking time
+- **f1** - Maximize user food preference (negated for pymoo)
+- **f2** - Minimize total meal cost
+- **f3** - Minimize total preparation + cooking time
 
 **Five nutritional constraints (DRI bounds):**
 Energy (kcal), Protein (g), Carbohydrate (g), Fiber (g), Sodium (mg)
